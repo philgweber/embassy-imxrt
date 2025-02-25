@@ -1218,10 +1218,25 @@ pub trait CaptureEvent: Pin + crate::Peripheral {
     /// Configures the pin as a capture event input.
     fn configure_for_event_capture(&self);
 }
+
+// macro_rules! impl_pin {
+//     ($piom_n:ident, $fn:ident, $invert:ident) => {
+        
+//     };
+// }
+
+
+
+/// A trait for pins that can be used as capture event inputs.
+pub trait CTimerMatchOutput: Pin + crate::Peripheral {
+    /// Configures the pin as a capture event input.
+    fn configure_for_ctimer_match_output(&self);
+}
+
 macro_rules! impl_pin {
     ($piom_n:ident, $fn:ident, $invert:ident) => {
-        impl CaptureEvent for crate::peripherals::$piom_n {
-            fn configure_for_event_capture(&self) {
+        impl CTimerMatchOutput for crate::peripherals::$piom_n {
+            fn configure_for_ctimer_match_output(&self) {
                 self.set_function(crate::iopctl::Function::$fn);
                 self.set_drive_mode(DriveMode::PushPull);
                 self.set_pull(Pull::None);
@@ -1232,20 +1247,9 @@ macro_rules! impl_pin {
                 self.set_input_inverter(Inverter::$invert);
             }
         }
-    };
-}
 
-
-
-/// A trait for pins that can be used as capture event inputs.
-pub trait CTimerMatchOutput: Pin + crate::Peripheral {
-    /// Configures the pin as a capture event input.
-    fn configure_for_ctimer_match_output(&self);
-}
-macro_rules! impl_pin {
-    ($piom_n:ident, $fn:ident, $invert:ident) => {
-        impl CTimerMatchOutput for crate::peripherals::$piom_n {
-            fn configure_for_ctimer_match_output(&self) {
+        impl CaptureEvent for crate::peripherals::$piom_n {
+            fn configure_for_event_capture(&self) {
                 self.set_function(crate::iopctl::Function::$fn);
                 self.set_drive_mode(DriveMode::PushPull);
                 self.set_pull(Pull::None);
