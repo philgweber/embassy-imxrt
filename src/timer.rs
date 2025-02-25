@@ -1268,3 +1268,4 @@ impl_pin!(PIO0_6, F4, Enabled);
 impl_pin!(PIO0_31, F4, Enabled);
 impl_pin!(PIO0_4, F4, Enabled);
 impl_pin!(PIO0_5, F4, Enabled);
+impl_pin!(PIO2_6, F4, Enabled);
