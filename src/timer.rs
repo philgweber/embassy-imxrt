@@ -1235,9 +1235,7 @@ macro_rules! impl_pin {
     };
 }
 
-// Capture event pins
-// We can add all the GPIO pins here which can be used as capture event inputs
-impl_pin!(PIO1_7, F4, Enabled);
+
 
 /// A trait for pins that can be used as capture event inputs.
 pub trait CTimerMatchOutput: Pin + crate::Peripheral {
@@ -1263,9 +1261,13 @@ macro_rules! impl_pin {
 
 // CTimer Match output pins
 // We can add all the GPIO pins here which can be used as CTimer Match output pins
+impl_pin!(PIO1_7, F4, Enabled);
 impl_pin!(PIO0_20, F4, Enabled);
 impl_pin!(PIO0_6, F4, Enabled);
 impl_pin!(PIO0_31, F4, Enabled);
 impl_pin!(PIO0_4, F4, Enabled);
 impl_pin!(PIO0_5, F4, Enabled);
 impl_pin!(PIO2_6, F4, Enabled);
+
+// Capture event pins
+// We can add all the GPIO pins here which can be used as capture event inputs
