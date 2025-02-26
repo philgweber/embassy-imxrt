@@ -633,6 +633,9 @@ impl<'d> Espi<'d> {
                 .intspc3()
                 .clear_bit_by_one()
         });
+
+        // Write to the srst
+        self.info.regs.port(0).irulestat().modify(|_,w| w.srst().set_bit());
     }
 
     /// Wait for controller event
